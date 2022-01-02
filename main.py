@@ -45,7 +45,26 @@ class KeywordQueryEventListener(EventListener):
         detectedlang = result['translations'][0]['detected_source_language']
 
         items.append(ExtensionResultItem(icon='images/icon.png',
-                                         name=detectedlang,
+                                         name=resulttext,
+                                         description='Detected lang: %s' % detectedlang,
+                                         highlightable=False,
+                                         on_enter=CopyToClipboardAction(resulttext)
+                                         ))
+
+        myobj = {'auth_key': apikey,
+                'text':event.get_argument(),
+                'target_lang':'EN',
+                'source_lang': targetlang
+                }
+
+        x = requests.post(url, data = myobj)
+        result = json.loads(x.content)
+
+        resulttext = result['translations'][0]['text']
+        detectedlang = result['translations'][0]['detected_source_language']
+
+        items.append(ExtensionResultItem(icon='images/icon.png',
+                                         name=resulttext,
                                          description='Detected lang: %s' % detectedlang,
                                          highlightable=False,
                                          on_enter=CopyToClipboardAction(resulttext)
