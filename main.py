@@ -46,4 +46,4 @@ class ItemEnterEventListener(EventListener):
 
 
 if __name__ == '__main__':
-    DemoExtension().run()
+    DeeplExtension().run()
