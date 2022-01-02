@@ -12,10 +12,10 @@ from ulauncher.api.shared.action.HideWindowAction import HideWindowAction
 logger = logging.getLogger(__name__)
 
 
-class DemoExtension(Extension):
+class DeeplExtension(Extension):
 
     def __init__(self):
-        super(DemoExtension, self).__init__()
+        super(DeeplExtension, self).__init__()
         self.subscribe(KeywordQueryEvent, KeywordQueryEventListener())
         self.subscribe(ItemEnterEvent, ItemEnterEventListener())
 
@@ -26,7 +26,7 @@ class KeywordQueryEventListener(EventListener):
         items = []
         logger.info('preferences %s' % json.dumps(extension.preferences))
         for i in range(5):
-            item_name = extension.preferences['item_name']
+            item_name = extension.preferences['deepl_apikey']
             data = {'new_name': '%s %s was clicked' % (item_name, i)}
             items.append(ExtensionResultItem(icon='images/icon.png',
                                              name='%s %s' % (item_name, i),
