@@ -9,23 +9,16 @@
   },
   "preferences": [
     {
-      "id": "demo_kw",
+      "id": "deepl_kw",
       "type": "keyword",
-      "name": "Demo",
-      "default_value": "dm"
+      "name": "Deepl Keyword",
+      "default_value": "dpl"
     },
     {
-      "id": "item_name",
+      "id": "deepl_apikey",
       "type": "input",
-      "name": "Item name",
-      "description": "Name for each item",
-      "default_value": "Item"
-    },
-    {
-      "id": "memo",
-      "type": "text",
-      "name": "Memo",
-      "description": "Write something here",
+      "name": "Deepl APIkey",
+      "description": "Register your apikey in https://www.deepl.com/pro?cta=header-pro-button",
       "default_value": ""
     }
   ]
