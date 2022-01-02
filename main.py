@@ -1,4 +1,5 @@
 import json
+import requests
 import logging
 from time import sleep
 from ulauncher.api.client.Extension import Extension
@@ -8,6 +9,7 @@ from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
 from ulauncher.api.shared.action.RenderResultListAction import RenderResultListAction
 from ulauncher.api.shared.action.ExtensionCustomAction import ExtensionCustomAction
 from ulauncher.api.shared.action.HideWindowAction import HideWindowAction
+from ulauncher.api.shared.action.CopyToClipboardAction import CopyToClipboardAction
 
 logger = logging.getLogger(__name__)
 
@@ -23,15 +25,31 @@ class DeeplExtension(Extension):
 class KeywordQueryEventListener(EventListener):
 
     def on_event(self, event, extension):
+        if event.get_argument() is None:
+            return
+
         items = []
-        logger.info('preferences %s' % json.dumps(extension.preferences))
-        for i in range(5):
-            item_name = extension.preferences['deepl_apikey']
-            data = {'new_name': '%s %s was clicked' % (item_name, i)}
-            items.append(ExtensionResultItem(icon='images/icon.png',
-                                             name='%s %s' % (item_name, i),
-                                             description='Item description %s' % i,
-                                             on_enter=ExtensionCustomAction(data, keep_app_open=True)))
+        apikey = extension.preferences['deepl_apikey']
+        targetlang = extension.preferences['target_lang']
+
+        url = 'https://api-free.deepl.com/v2/translate'
+        myobj = {'auth_key': apikey,
+                'text':event.get_argument(),
+                'target_lang':targetlang
+                }
+
+        x = requests.post(url, data = myobj)
+        result = json.loads(x.content)
+
+        resulttext = result['translations'][0]['text']
+        detectedlang = result['translations'][0]['detected_source_language']
+
+        items.append(ExtensionResultItem(icon='images/icon.png',
+                                         name=detectedlang,
+                                         description='Detected lang: %s' % detectedlang,
+                                         highlightable=False,
+                                         on_enter=CopyToClipboardAction(resulttext)
+                                         ))
 
         return RenderResultListAction(items)
 

@@ -20,6 +20,13 @@
       "name": "Deepl APIkey",
       "description": "Register your apikey in https://www.deepl.com/pro?cta=header-pro-button",
       "default_value": ""
+    },
+    {
+      "id": "target_lang",
+      "type": "input",
+      "name": "Target language",
+      "description": "Two character lang code in upper case (ES, DE, IT)",
+      "default_value": "EN"
     }
   ]
 }
