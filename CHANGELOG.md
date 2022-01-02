@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.1.1 - 2022-01-02
+#### Bug Fixes
+- Replace icon - (e2e6f84) - Jose Francisco Rives Lirola
+- - -
+
 ## 0.1.0 - 2022-01-02
 #### Features
 - **(request)** Add to english request and target lang request - (32af2d1) - Jose Francisco Rives Lirola
